@@ -1,5 +1,4 @@
-# [Light Bootstrap Dashboard Angular](https://demos.creative-tim.com/light-bootstrap-dashboard-angular2/dashboard)
-[![version][version-badge]][CHANGELOG] ![license][license-badge]
+# Proyecto final
 
 ![alt text](src/assets/img/opt_lbd_angular_thumbnail.jpg)
 
@@ -123,27 +122,7 @@ light-bootstrap-dashboard-angular
 └── typings.json
 
 ```
-## Useful Links
 
-More products from Creative Tim: <https://www.creative-tim.com/bootstrap-themes>
-
-Tutorials: <https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w>
-
-Freebies: <https://www.creative-tim.com/products>
-
-Affiliate Program (earn money): <https://www.creative-tim.com/affiliates/new>
-
-Social Media:
-
-Twitter: <https://twitter.com/CreativeTim>
-
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Dribbble: <https://dribbble.com/creativetim>
-
-Google+: <https://plus.google.com/+CreativetimPage>
-
-Instagram: <https://instagram.com/creativetimofficial>
 
 [CHANGELOG]: ./CHANGELOG.md
 
