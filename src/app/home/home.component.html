@@ -1,21 +1,30 @@
 <div class="main-content">
   <div class="container-fluid">
 
-    <div class="row">
+    <div class="row" *ngIf="!showForm">
       <div class="col-md-12">
         <div class="card">
           <div class="header">
             <h4 class="title">Listado de blogs</h4>
+            <button class="btn btn-danger btn-fill" (click)="addBlog()"><i class="pe-7s-pen"></i> Crear Blog</button>
           </div>
+          <div class="clearfix"></div>
           <div class="content">
-            <div class="row">
+            <div class="list-blogs ">
+              
               <div class="custom-card" style="width: 18rem;" *ngFor="let blog of blogs">
-                <img [src]="blog.image" class="card-img-top" alt="Blog" style="width: 50%;">
+                <img *ngIf="blog.image" [src]="blog.image" class="card-img-top" alt="Blog" style="width: 50%;">
+                <img *ngIf="!blog.image" src="assets/img/image.png" class="card-img-top" alt="Blog" style="width: 100%;">
                 <div class="card-body">
                   <h5 class="card-title"><strong> {{blog.title}}</strong></h5>
                   <app-qualification [rating]="blog.qualification"></app-qualification>
                   <p class="card-text">{{blog.resume}}</p>
-                  <a href="#" class="btn btn-primary">Ver</a>
+                  
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-default"><i class="pe-7s-news-paper"></i></button>
+                  <button *ngIf="blog.status!=='INACTIVO'" class="btn btn-danger" (click)="editBlog(blog)"><i class="pe-7s-pen"></i></button>
+                  <button *ngIf="blog.status!=='INACTIVO'" class="btn btn-default" (click)="deleteBlog(blog)"><i class="pe-7s-trash"></i></button>
                 </div>
               </div>
 
@@ -26,24 +35,25 @@
 
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="showForm">
       <div class="col-md-8">
         <div class="card">
           <div class="header">
-            <h4 class="title">Crear Blog</h4>
+            <h4 class="title">{{title}}</h4>
           </div>
           <div class="content">
             <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
               <div class="row">
 
-                <div class="col-md-6" [ngClass]="{ 'has-error': blogForm.get('title')?.invalid && (blogForm.dirty || blogForm.touched)  }">
+                <div class="col-md-6"
+                  [ngClass]="{ 'has-error': blogForm.get('title')?.invalid && (blogForm.dirty || blogForm.touched)  }">
                   <div class="form-group">
                     <label for="title" class="form-label">Título:</label>
                     <input type="text" class="form-control" id="title" formControlName="title">
                     <small *ngIf="blogForm.get('title')?.invalid && blogForm.get('title')?.touched" class="text-danger">
                       El título es requerido.
-                    </small >
+                    </small>
                   </div>
                 </div>
 
@@ -56,22 +66,26 @@
               </div>
 
               <div class="row">
-                <div class="col-md-12" [ngClass]="{ 'has-error': blogForm.invalid && (blogForm.dirty || blogForm.touched)  }">
+                <div class="col-md-12"
+                  [ngClass]="{ 'has-error': blogForm.get('resume').invalid && (blogForm.dirty || blogForm.touched)  }">
                   <div class="form-group">
                     <label for="resume" class="form-label">Resumen:</label>
                     <textarea id="resume" formControlName="resume" class="form-control"></textarea>
-                    <small *ngIf="blogForm.get('resume')?.invalid && blogForm.get('resume')?.touched" class="text-danger">
+                    <small *ngIf="blogForm.get('resume')?.invalid && blogForm.get('resume')?.touched"
+                      class="text-danger">
                       El resumen es requerido.
                     </small>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12" [ngClass]="{ 'has-error': blogForm.get('content')?.invalid && (blogForm.dirty || blogForm.touched)  }">
+                <div class="col-md-12"
+                  [ngClass]="{ 'has-error': blogForm.get('content')?.invalid && (blogForm.dirty || blogForm.touched)  }">
                   <div class="form-group">
                     <label for="content" class="form-label">Contenido:</label>
                     <textarea id="content" formControlName="content" class="form-control"></textarea>
-                    <small *ngIf="blogForm.get('content')?.invalid && blogForm.get('content')?.touched" class="text-danger">
+                    <small *ngIf="blogForm.get('content')?.invalid && blogForm.get('content')?.touched"
+                      class="text-danger">
                       El contenido es requerido.
                     </small>
                   </div>
@@ -80,27 +94,33 @@
               </div>
 
               <div class="row">
-                <div class="col-md-5" [ngClass]="{ 'has-error': blogForm.get('category')?.invalid && (blogForm.dirty || blogForm.touched)  }">
+                <div class="col-md-5"
+                  [ngClass]="{ 'has-error': blogForm.get('category')?.invalid && (blogForm.dirty || blogForm.touched)  }">
                   <div class="form-group">
                     <label for="category" class="form-label">Categoría:</label>
                     <select id="category" formControlName="category" class="form-control">
                       <option value="" selected>Seleccione...</option>
-                      <option *ngFor="let category of categories" [value]="category">
+                      <option *ngFor="let category of categories" [ngValue]="category">
                         {{ category.name }}
                       </option>
                     </select>
-                    <small *ngIf="blogForm.get('category')?.invalid && (blogForm.get('category')?.dirty || blogForm.get('category')?.touched)" class="text-danger">
+                    <small
+                      *ngIf="blogForm.get('category')?.invalid && (blogForm.get('category')?.dirty || blogForm.get('category')?.touched)"
+                      class="text-danger">
                       La categoría es requerida.
                     </small>
                   </div>
 
                 </div>
               </div>
+              <div class="form-actions ">
+                <div class="text-end ">
+                  <button type="submit" [disabled]="blogForm.invalid" class="btn btn-danger btn-fill btn-sm"><i class="pe-7s-diskette"></i> Guardar
+                    cambios</button>
+                  <button class="btn btn-default btn-fill btn-sm" (click)="cancelAddBlog()"><i class="pe-7s-close-circle"></i> Cancelar</button>
+                </div>
+              </div>
 
-
-
-              <button type="submit" [disabled]="blogForm.invalid" class="btn btn-info btn-fill pull-right">Guardar
-                cambios</button>
               <div class="clearfix"></div>
             </form>
 

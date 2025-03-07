@@ -1,6 +1,42 @@
 .custom-card {
-    border: 1px solid #007bff; /* Borde azul de 3px */
+    border: 1px solid #cbcdcd; /* Borde azul de 3px */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    width: 45rem !important; /* Ancho del 100% */
+    padding: 10px; /* Relleno de 10px */
   }
   
+.list-blogs {
+    display: flex; /* Flexbox */
+    flex-wrap: wrap; /* Envolver elementos */
+    justify-content: space-around; /* Justificar contenido */
+    gap: 20px; /* Espacio entre elementos */
+  }
+
+  .card-body{
+    min-height: 120px;
+  }
+
+  .card-footer {
+    background-color: #f8f9fa; /* Color de fondo similar al de Bootstrap */
+    border-top: 1px solid rgba(0, 0, 0, 0.125); /* Borde superior */
+    padding: 0.75rem 1.25rem; /* Espaciado interno (padding) */
+    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); /* Bordes redondeados solo en la parte inferior */
+    font-size: 0.875rem; /* Tamaño de fuente */
+    color: #6c757d; /* Color de texto */
+    text-align: center; /* Alineación del texto */
+  }
+  
+  .card-footer:last-child {
+    border-radius: 0 0 0.25rem 0.25rem; /* Asegura bordes redondeados en la parte inferior */
+  }
+  
+  .card-footer a {
+    color: #007bff; /* Color de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  .card-footer a:hover {
+    color: #0056b3; /* Color de los enlaces al pasar el mouse */
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+  }
